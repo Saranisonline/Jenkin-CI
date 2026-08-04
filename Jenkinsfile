@@ -1,22 +1,33 @@
 pipeline {
     agent any
 
+    tools {
+        maven 'Maven'
+    }
+
     stages {
-        stage('Build') {
+
+        stage('Checkout') {
             steps {
-                echo 'Building Project...'
+                echo 'Source Code Ready'
+            }
+        }
+
+        stage('Compile') {
+            steps {
+                bat 'mvn compile'
             }
         }
 
         stage('Test') {
             steps {
-                echo 'Testing Project...'
+                bat 'mvn test'
             }
         }
 
-        stage('Deploy') {
+        stage('Package') {
             steps {
-                echo 'Deployment Successful'
+                bat 'mvn package'
             }
         }
     }
