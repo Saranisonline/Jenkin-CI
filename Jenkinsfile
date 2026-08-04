@@ -6,28 +6,27 @@ pipeline {
     }
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                echo 'Source Code Ready'
-            }
-        }
-
         stage('Compile') {
             steps {
-                bat 'mvn compile'
+                dir('DemoProject') {
+                    bat 'mvn compile'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                bat 'mvn test'
+                dir('DemoProject') {
+                    bat 'mvn test'
+                }
             }
         }
 
         stage('Package') {
             steps {
-                bat 'mvn package'
+                dir('DemoProject') {
+                    bat 'mvn package'
+                }
             }
         }
     }
